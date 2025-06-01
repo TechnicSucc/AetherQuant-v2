@@ -6,9 +6,9 @@ import streamlit as st
 from data_streams import (
     get_fake_price_data,
     get_fake_order_blocks,
-    get_fake_news_sentiment,
-    get_fake_order_flow
+    get_fake_news_sentiment
 )
+
 from eodhd_options import get_live_order_flow_eodhd
 from export_tools import export_signals_to_pdf, send_signals_to_notion
 from signal_engine import generate_trade_signals
