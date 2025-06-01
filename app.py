@@ -9,10 +9,10 @@ from signal_engine import generate_trade_signals
 from options_monitor import display_options_monitor
 from data_streams import (
     get_fake_price_data,
-    get_fake_order_flow,
     get_fake_order_blocks,
     get_fake_news_sentiment,
 )
+from eodhd_options import get_live_order_flow_eodhd
 from export_tools import export_signals_to_pdf, send_signals_to_notion
 
 st.set_page_config(page_title="AetherQuant v2 – Real-Time AI Trade Command Console", layout="wide")
@@ -50,7 +50,7 @@ else:
     st.warning("No order blocks detected.")
 
 st.markdown("### 🧠 Option Order Flow")
-flow = get_fake_order_flow(ticker)
+flow = get_live_order_flow_eodhd(ticker, st.secrets["EODHD_API_KEY"])
 
 if flow:
     col1, col2 = st.columns([1, 3])
