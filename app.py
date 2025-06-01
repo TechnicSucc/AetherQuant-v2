@@ -49,7 +49,6 @@ if order_blocks:
 else:
     st.warning("No order blocks detected.")
 
-
 st.markdown("### 🧠 Option Order Flow")
 flow = get_fake_order_flow(ticker)
 st.write(f"Bias: **{flow['bias']}**")
