@@ -1,0 +1,15 @@
+[project]
+name = "aetherquant"
+version = "0.1.0"
+description = "Real-time AI trade command console for options"
+dependencies = [
+  "streamlit",
+  "pandas",
+  "numpy",
+  "requests",
+  "fpdf",
+  "notion-client",
+  "plotly",
+  "yfinance",
+  "altair"
+]
