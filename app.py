@@ -41,9 +41,14 @@ price_output = get_fake_price_data(ticker)
 st.success(price_output)
 
 st.markdown("### 📦 Order Blocks")
-blocks = get_fake_order_blocks(ticker)
-for block in blocks:
-    st.info(f"{block['type']} Block @ ${block['price']} | Volume: {block['volume']}")
+order_blocks = get_fake_order_blocks()
+
+if order_blocks:
+    for block in order_blocks:
+        st.info(f"{block.get('type', 'Unknown')} Block @ ${block.get('price', '?')} | Volume: {block.get('volume', '?')}")
+else:
+    st.warning("No order blocks detected.")
+
 
 st.markdown("### 🧠 Option Order Flow")
 flow = get_fake_order_flow(ticker)
