@@ -29,8 +29,7 @@ with st.sidebar:
     ticker = st.text_input("Enter Ticker Symbol", value="QQQ")
     timeframe = st.selectbox("Select Timeframe", options=["1m", "2m", "5m"])
     trade_mode = st.radio("Trade Mode", ["Day Trade (0DTE)", "Swing Trade"])
-    refresh_toggle = st.checkbox("🔁 Auto-Refresh Every 60 Seconds")
-    st.button("🔄 Refresh Streams")
+    refresh_toggle = st.checkbox("🔄 Refresh Streams")
 
 # --- Dashboard Sections ---
 from data_streams import get_fake_price_data
