@@ -3,12 +3,14 @@
 import os
 import time
 import streamlit as st
+import yfinance as yf
+import plotly.graph_objects as go
+from datetime import datetime, timedelta
 from data_streams import (
     get_fake_price_data,
     get_fake_order_blocks,
     get_fake_news_sentiment
 )
-
 from eodhd_options import get_live_order_flow_eodhd
 from export_tools import export_signals_to_pdf, send_signals_to_notion
 from signal_engine import generate_trade_signals
@@ -29,8 +31,33 @@ if refresh_toggle:
 
 if ticker:
     st.markdown("### 📈 Price Data")
-    price_output = get_fake_price_data(ticker)
-    st.success(price_output)
+    st.markdown("### 📈 Live Price Chart")
+
+try:
+    # Fetch past 2 days of 5-minute interval data
+    stock_data = yf.download(ticker, period="2d", interval="5m", progress=False)
+
+    if not stock_data.empty:
+        fig = go.Figure(data=[
+            go.Candlestick(
+                x=stock_data.index,
+                open=stock_data["Open"],
+                high=stock_data["High"],
+                low=stock_data["Low"],
+                close=stock_data["Close"],
+                name="Price"
+            )
+        ])
+        fig.update_layout(title=f"{ticker} – 5min Candlestick Chart", xaxis_rangeslider_visible=False)
+        st.plotly_chart(fig, use_container_width=True)
+
+        latest_price = stock_data["Close"].iloc[-1]
+        st.success(f"{ticker} price: ${round(latest_price, 2)}")
+    else:
+        st.warning("No price data available.")
+except Exception as e:
+    st.error(f"Error fetching chart: {e}")
+
 
     st.markdown("### 📦 Order Blocks")
     blocks = get_fake_order_blocks(ticker)
