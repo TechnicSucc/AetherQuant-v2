@@ -89,7 +89,8 @@ if ticker:
     f"**{sig.get('type', 'Unknown')} {sig.get('contract', '')}** → Entry: ${sig.get('entry', '?')} | TP: ${sig.get('target', '?')} | SL: ${sig.get('stop', '?')}"
     )
 
-    st.download_button("⬇️ Download Signals as PDF", export_signals_to_pdf(signals), file_name="signals.pdf")
+    pdf_data = export_signals_to_pdf(signals)
+    st.download_button("⬇️ Download Signals as PDF", pdf_data, file_name="signals.pdf")
     if st.button("📤 Send to Notion"):
         try:
             send_signals_to_notion(signals)

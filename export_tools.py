@@ -1,26 +1,26 @@
 from fpdf import FPDF
 from notion_client import Client
+from io import BytesIO
 import datetime
 
-def export_signals_to_pdf(signals, filename="AetherQuant_Signals.pdf"):
+def export_signals_to_pdf(signals):
     pdf = FPDF()
     pdf.set_auto_page_break(auto=True, margin=15)
     pdf.add_page()
 
-    # Use standard characters to avoid UnicodeEncodeError
+    # Use ASCII-safe title
     pdf.set_font("Arial", "B", 16)
     pdf.cell(200, 10, "AetherQuant AI Trade Signals", ln=True, align="C")
     pdf.ln(10)
 
     pdf.set_font("Arial", "", 12)
     for i, signal in enumerate(signals):
-        # Clean and format values safely
         contract = str(signal.get("contract", "N/A"))
         entry = str(signal.get("entry", "N/A"))
         tp = str(signal.get("tp", "N/A"))
         sl = str(signal.get("sl", "N/A"))
         confidence = str(signal.get("confidence", "N/A"))
-        reason = str(signal.get("reason", "No reason provided"))
+        reason = str(signal.get("reason", "No reason provided")).replace("™", "")
 
         text = (
             f"Trade #{i+1}\n"
@@ -33,7 +33,10 @@ def export_signals_to_pdf(signals, filename="AetherQuant_Signals.pdf"):
         pdf.multi_cell(0, 10, text)
         pdf.ln(2)
 
-    pdf.output(filename)
+    buffer = BytesIO()
+    pdf.output(buffer)
+    buffer.seek(0)
+    return buffer
 
 def send_signals_to_notion(signals, notion_token, database_id):
     notion = Client(auth=notion_token)
