@@ -1,6 +1,6 @@
-streamlit
+streamlit==1.45.1
+fpdf==1.7.2
+notion-client==2.2.0
+requests
+numpy
 pandas
-fpdf
-notion-client
-yfinance
-plotly
