@@ -71,6 +71,7 @@ else:
     st.warning("No option flow data available.")
 
 
+# 📰 Sentiment & News
 st.markdown("### 📰 Sentiment & News")
 sentiment = get_fake_news_sentiment(ticker, trade_mode)
 
@@ -78,15 +79,16 @@ score = sentiment["score"]
 headlines = sentiment["headlines"]
 
 if score > 0.2:
-    st.success(f"🟢 Bullish Sentiment | Score: {score}")
+    st.success(f"🟢 Bullish Sentiment (Score: {score})")
 elif score < -0.2:
-    st.error(f"🔴 Bearish Sentiment | Score: {score}")
+    st.error(f"🔴 Bearish Sentiment (Score: {score})")
 else:
-    st.info(f"⚪ Neutral Sentiment | Score: {score}")
+    st.info(f"🟡 Neutral Sentiment (Score: {score})")
 
-st.markdown("**Latest Headlines:**")
-for h in headlines:
-    st.markdown(f"- {h}")
+st.markdown("#### News Headlines")
+for headline in headlines:
+    st.write(f"• {headline}")
+
 
 # --- Options Monitor ---
 st.markdown("### 📊 Options Monitor")
