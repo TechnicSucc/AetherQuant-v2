@@ -19,9 +19,6 @@ st.set_page_config(page_title="AetherQuant v2 – Real-Time AI Trade Command Con
 
 st.title("📡 AetherQuant v2 – Real-Time AI Trade Command Console")
 
-if refresh_toggle:
-    time.sleep(60)
-    st.experimental_rerun()
 
 # --- Sidebar ---
 with st.sidebar:
@@ -29,7 +26,12 @@ with st.sidebar:
     ticker = st.text_input("Enter Ticker Symbol", value="QQQ")
     timeframe = st.selectbox("Select Timeframe", options=["1m", "2m", "5m"])
     trade_mode = st.radio("Trade Mode", ["Day Trade (0DTE)", "Swing Trade"])
-    refresh_toggle = st.checkbox("🔄 Refresh Streams")
+    refresh_toggle = st.checkbox("🔄 Auto-Refresh Every 60s")
+
+if refresh_toggle:
+    time.sleep(60)
+    st.experimental_rerun()
+
 
 # --- Dashboard Sections ---
 from data_streams import get_fake_price_data
