@@ -13,3 +13,19 @@ dependencies = [
   "yfinance",
   "altair"
 ]
+
+[tool.poetry]
+name = "aetherquant"
+version = "0.1.0"
+description = "Real-time AI Options Dashboard"
+authors = ["Devinder Kumar <devinderkvermaisdaboss@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = ">=3.9,<4.0"
+streamlit = "*"
+notion-client = "*"
+fpdf = "*"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
