@@ -51,7 +51,7 @@ else:
 
 st.markdown("### 🧠 Option Order Flow")
 flow = get_fake_order_flow(ticker)
-st.write(f"Bias: **{flow['bias']}**")
+st.write(f"Bias: **{flow_data['bias']}**")
 if flow["unusual_activity"]:
     st.warning("⚠️ Unusual options activity detected!")
 else:
