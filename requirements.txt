@@ -1,5 +1,5 @@
 streamlit
 requests
 pandas
-fpdf
+fpdf2
 notion-client
