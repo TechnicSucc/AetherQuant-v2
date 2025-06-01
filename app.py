@@ -41,7 +41,7 @@ price_output = get_fake_price_data(ticker)
 st.success(price_output)
 
 st.markdown("### 📦 Order Blocks")
-order_blocks = get_fake_order_blocks()
+order_blocks = get_fake_order_blocks(ticker)
 
 if order_blocks:
     for block in order_blocks:
