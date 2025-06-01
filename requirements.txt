@@ -1,5 +1,5 @@
-streamlit==1.45.1
-pandas==2.2.3
+streamlit
+pandas
 requests
-notion-client==2.1.0
-fpdf==1.7.2
+fpdf
+notion-client
