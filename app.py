@@ -51,12 +51,16 @@ else:
 
 st.markdown("### 🧠 Option Order Flow")
 flow = get_fake_order_flow(ticker)
-st.write(f"Bias: **{flow['bias']}**")
 
-if flow["unusual_activity"]:
-    st.warning("⚠️ Unusual options activity detected!")
+if flow:
+    st.write(f"Bias: **{flow['bias']}**")
+    if flow["unusual_activity"]:
+        st.warning("⚠️ Unusual options activity detected!")
+    else:
+        st.success("✅ No unusual activity.")
 else:
-    st.success("✅ No unusual activity detected.")
+    st.error("Failed to retrieve option flow data.")
+
 
 st.markdown("### 📰 Sentiment & News")
 sentiment = get_fake_news_sentiment(ticker)
