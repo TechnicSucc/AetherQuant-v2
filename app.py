@@ -33,28 +33,34 @@ if ticker:
     st.markdown("### 📈 Live Price Chart")
 
     try:
-        stock_data = yf.download(ticker, period="2d", interval="5m", progress=False)
-        if not stock_data.empty:
-            fig = go.Figure(data=[
-                go.Candlestick(
-                    x=stock_data.index,
-                    open=stock_data["Open"],
-                    high=stock_data["High"],
-                    low=stock_data["Low"],
-                    close=stock_data["Close"],
-                    name="Price"
-                )
-            ])
-            fig.update_layout(title=f"{ticker} – 5min Candlestick Chart", xaxis_rangeslider_visible=False)
-            st.plotly_chart(fig, use_container_width=True)
+    stock_data = yf.download(ticker, period="2d", interval="5m", progress=False).dropna()
 
-            latest_price = stock_data["Close"].iloc[-1]
-            st.success(f"{ticker} price: ${round(latest_price, 2)}")
-        else:
-            st.warning("No price data available.")
-    except Exception as e:
-        st.error(f"Error fetching chart: {e}")
-        latest_price = 0.0
+    if not stock_data.empty and all(col in stock_data.columns for col in ["Open", "High", "Low", "Close"]):
+        fig = go.Figure(data=[
+            go.Candlestick(
+                x=stock_data.index,
+                open=stock_data["Open"],
+                high=stock_data["High"],
+                low=stock_data["Low"],
+                close=stock_data["Close"]
+            )
+        ])
+        fig.update_layout(
+            title=f"{ticker} – 5min Candlestick Chart",
+            xaxis_rangeslider_visible=False,
+            yaxis_title="Price",
+            template="plotly_dark",
+            height=400
+        )
+        st.plotly_chart(fig, use_container_width=True)
+
+        latest_price = stock_data["Close"].iloc[-1]
+        st.success(f"{ticker} price: ${round(latest_price, 2)}")
+    else:
+        st.warning("No valid candlestick data available.")
+except Exception as e:
+    st.error(f"Error fetching or rendering chart: {e}")
+
 
     st.markdown("### 📦 Order Blocks")
     blocks = get_fake_order_blocks(ticker)
