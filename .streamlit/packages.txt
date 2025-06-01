@@ -1,0 +1,2 @@
+mkdir .streamlit
+echo "# force rebuild" > .streamlit/packages.txt
