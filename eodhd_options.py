@@ -2,16 +2,20 @@
 import requests
 import os
 
-# Your actual EODHD API key
-EODHD_API_KEY = "683bb05655eb24.11196226"
+# Set your EODHD API key (can be overridden via environment variable)
+EODHD_API_KEY = os.getenv("EODHD_API_KEY", "683bb05655eb24.11196226")
 
 BASE_URL = "https://eodhistoricaldata.com/api"
 
-def get_live_order_flow_eodhd(ticker):
+def get_live_order_flow_eodhd(ticker, api_key=EODHD_API_KEY):
+    """
+    Simulates live order flow pulled using an API key. Replace with real logic later.
+    Returns dict with bias, unusual_activity, and mock detail list.
+    """
     return {
         "bias": "neutral",
         "unusual_activity": False,
-        "details": [f"No live flow available for {ticker}."]
+        "details": [f"No live flow available for {ticker} (API placeholder)."]
     }
 
 def get_qqq_options_chain():
@@ -52,7 +56,7 @@ def get_qqq_options_chain():
         print(f"Error fetching QQQ options: {e}")
         return [], []
 
-
+# Test when run directly
 if __name__ == "__main__":
     calls, puts = get_qqq_options_chain()
     print("Top 5 Call Options:")

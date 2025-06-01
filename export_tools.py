@@ -1,14 +1,12 @@
 from fpdf import FPDF
 from notion_client import Client
 from io import BytesIO
-import datetime
 
 def export_signals_to_pdf(signals):
     pdf = FPDF()
     pdf.set_auto_page_break(auto=True, margin=15)
     pdf.add_page()
 
-    # Use ASCII-safe title
     pdf.set_font("Arial", "B", 16)
     pdf.cell(200, 10, "AetherQuant AI Trade Signals", ln=True, align="C")
     pdf.ln(10)
@@ -33,10 +31,9 @@ def export_signals_to_pdf(signals):
         pdf.multi_cell(0, 10, text)
         pdf.ln(2)
 
-    buffer = BytesIO()
-    pdf.output(buffer)
-    buffer.seek(0)
-    return buffer
+    # Return binary content as BytesIO object
+    pdf_binary = pdf.output(dest='S').encode('latin1')
+    return BytesIO(pdf_binary)
 
 def send_signals_to_notion(signals, notion_token, database_id):
     notion = Client(auth=notion_token)

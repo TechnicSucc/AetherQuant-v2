@@ -90,7 +90,7 @@ if ticker:
     )
 
     pdf_data = export_signals_to_pdf(signals)
-    st.download_button("⬇️ Download Signals as PDF", pdf_data, file_name="signals.pdf")
+    st.download_button("⬇️ Download Signals as PDF", data=pdf_data, file_name="signals.pdf")
     if st.button("📤 Send to Notion"):
         try:
             send_signals_to_notion(signals)
