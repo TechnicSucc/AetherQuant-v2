@@ -63,7 +63,7 @@ else:
 
 
 st.markdown("### 📰 Sentiment & News")
-sentiment = get_fake_news_sentiment(ticker)
+sentiment = get_fake_news_sentiment(ticker, trade_mode)
 
 score = sentiment["score"]
 headlines = sentiment["headlines"]
