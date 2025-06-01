@@ -1,0 +1,6 @@
+streamlit
+pandas
+fpdf
+notion-client
+yfinance
+plotly
