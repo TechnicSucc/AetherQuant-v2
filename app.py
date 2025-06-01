@@ -151,4 +151,6 @@ st.write(f"📰 Sentiment Score: **{sentiment_data['score']}**")
 st.write(f"🎯 Contracts Evaluated: **{len(contracts)}**")
 st.write(f"✅ Signals Generated: **{len(signals)}**")
 
+# Dummy comment
+
 
