@@ -20,6 +20,7 @@ def get_fake_order_blocks(ticker):
     ]
 
 def get_fake_news_sentiment(ticker, mode):
+    score = round(random.uniform(-1, 1), 2)
     if "Day" in mode:
         headlines = [
             f"{ticker} surging pre-market after Fed comments",
@@ -32,8 +33,8 @@ def get_fake_news_sentiment(ticker, mode):
             f"Earnings season improving sentiment on {ticker}",
             f"Analysts raise PT for {ticker}"
         ]
-    score = round(random.uniform(-1.0, 1.0), 2)
     return {
         "score": score,
-        "headlines": random.sample(headlines, 2)
+        "headlines": headlines
     }
+
