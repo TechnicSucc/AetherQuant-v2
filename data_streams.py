@@ -5,16 +5,13 @@ def get_fake_price_data(ticker):
     return f"{ticker} price: ${price}"
 
 def get_fake_order_flow(ticker):
-    descriptions = [
-        f"{ticker} 0DTE $445C — 1,200 contracts @ $2.35 (sweep)",
-        f"{ticker} 1W $430P — 900 contracts @ $1.10 (block trade)",
-        f"{ticker} $440C — rising open interest"
+    flows = [
+        {"bias": "call", "unusual_activity": True},
+        {"bias": "put", "unusual_activity": False},
+        {"bias": "neutral", "unusual_activity": False}
     ]
-    return {
-        "bias": random.choice(["call", "put", "neutral"]),
-        "unusual_activity": random.choice([True, False]),
-        "note": random.choice(descriptions)
-    }
+    return random.choice(flows)
+
 
 def get_fake_order_blocks(ticker):
     return [
