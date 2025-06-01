@@ -7,6 +7,12 @@ EODHD_API_KEY = "683bb05655eb24.11196226"
 
 BASE_URL = "https://eodhistoricaldata.com/api"
 
+def get_live_order_flow_eodhd(ticker):
+    return {
+        "bias": "neutral",
+        "unusual_activity": False,
+        "details": [f"No live flow available for {ticker}."]
+    }
 
 def get_qqq_options_chain():
     endpoint = f"{BASE_URL}/options/QQQ.US"
