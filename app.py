@@ -45,7 +45,8 @@ order_blocks = get_fake_order_blocks(ticker)
 
 if order_blocks:
     for block in order_blocks:
-        st.info(f"{block.get('type', 'Unknown')} Block @ ${block.get('price', '?')} | Volume: {block.get('volume', '?')}")
+    st.info(block)
+
 else:
     st.warning("No order blocks detected.")
 
