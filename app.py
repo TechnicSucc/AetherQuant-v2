@@ -82,8 +82,12 @@ if ticker:
     mode = "day" if "Day" in trade_mode else "swing"
     signals = generate_trade_signals(price_data, flow_data, sentiment_data, mode)
 
+st.write("Generated Signals:", signals)
+
     for sig in signals:
-        st.markdown(f"**{sig['type']} {sig['contract']}** → Entry: ${sig['entry']} | TP: ${sig['target']} | SL: ${sig['stop']}")
+        st.markdown(
+    f"**{sig.get('type', 'Unknown')} {sig.get('contract', '')}** → Entry: ${sig.get('entry', '?')} | TP: ${sig.get('target', '?')} | SL: ${sig.get('stop', '?')}"
+)
 
     st.download_button("⬇️ Download Signals as PDF", export_signals_to_pdf(signals), file_name="signals.pdf")
     if st.button("📤 Send to Notion"):
