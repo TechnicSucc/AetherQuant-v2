@@ -1,3 +1,4 @@
 streamlit
-fpdf==1.7.2
+requests
+pandas
 fpdf
