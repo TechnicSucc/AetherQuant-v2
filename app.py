@@ -110,8 +110,9 @@ if ticker:
 
     for sig in signals:
         st.markdown(
-            f"**{sig.get('type', 'Unknown')} {sig.get('contract', '')}** → Entry: ${sig.get('entry', '?')} | TP: ${sig.get('target', '?')} | SL: ${sig.get('stop', '?')}"
+            f"**{sig.get('strategy', 'Unknown')} {sig.get('contract', '')}** → Entry: ${sig.get('entry', '?')} | TP: ${sig.get('tp', '?')} | SL: ${sig.get('sl', '?')}"
         )
+
 
     pdf_data = export_signals_to_pdf(signals)
     st.download_button("⬇️ Download Signals as PDF", data=pdf_data, file_name="signals.pdf")
