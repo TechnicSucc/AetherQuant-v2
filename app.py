@@ -45,8 +45,7 @@ order_blocks = get_fake_order_blocks(ticker)
 
 if order_blocks:
     for block in order_blocks:
-    st.info(block)
-
+        st.info(block)
 else:
     st.warning("No order blocks detected.")
 
