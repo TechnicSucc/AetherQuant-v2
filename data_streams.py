@@ -12,7 +12,6 @@ def get_fake_order_flow(ticker):
     ]
     return random.choice(flows)
 
-
 def get_fake_order_blocks(ticker):
     return [
         {"type": "Buy", "price": round(random.uniform(435, 440), 2), "volume": random.randint(500, 1000)},
